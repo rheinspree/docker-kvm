@@ -1,20 +1,15 @@
 # QEMU/KVM 
-# VERSION 0.3
-FROM stackbrew/ubuntu:trusty
-MAINTAINER ulexus@gmail.com
+FROM ubuntu:trusty
+MAINTAINER Ian Blenke <ian@blenke.com>
 
 RUN apt-get -y update
-RUN apt-get -y upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install qemu-kvm libvirt-bin bridge-utils
 
-# Install QEMU/KVM
-RUN apt-get -y install qemu-kvm
+ADD definitions/ /etcd/libvirt/qemu
 
-# Install Ceph common utilities/libraries
-RUN apt-get -y install ceph-common
+ADD run.sh /run.sh
+RUN chmod +x /run.sh
 
-# Add entrypoint script
-ADD entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
+VOLUME /var/lib/libvirt
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD []
+CMD /run.sh
