@@ -2,9 +2,7 @@ FROM ubuntu:trusty
 MAINTAINER Ian Blenke <ian@blenke.com>
 
 RUN apt-get -y update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install kvm qemu-kvm libvirt-bin bridge-utils libguestfs-tools aria2 unzip dos2unix unrar-free wget
-
-ADD definitions/ /etc/libvirt/qemu
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install kvm qemu-kvm libvirt-bin bridge-utils libguestfs-tools aria2 unzip dos2unix unrar-free wget git
 
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
