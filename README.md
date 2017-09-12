@@ -20,12 +20,6 @@ While this is obviously not ideal, it isn't actually _that_ bad, since you are r
 
 Sometimes you need to orchestrate immutable windows instances, and Windows Server Containers aren't available yet.
 
-## Networking
-
-The entrypoint script allows you to pass the `$BRIDGE_IF` environment variable.  If set, it will add that bridge interface to the container's `/etc/kvm/bridge.conf` file which, in turn, allow your kvm instance to attach to that bridge using the built-in `kvm-bridge-helper`.
-
-Note, however, that if you want to do this, you'll need to pass the `--net=host` option to your `docker run` command, in order to access the host's networking namespace.
-
 ## Service file
 
 Also included in this repo is a service file, suitable for use with systemd (CoreOS and fleet), provided as an example.  You'll need to fill in your own values, of course, and customize it to your liking.
